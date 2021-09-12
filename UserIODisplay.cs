@@ -23,22 +23,16 @@ namespace Hangman
             var sb = new StringBuilder();
             for (int i = 0; i < word.Length; i++)
             {
-                if (correctLetters != null)
+                // null-conditional operator
+                // https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/october/csharp-the-new-and-improved-csharp-6-0
+                if (correctLetters?.Contains(word[i]) ?? false)
                 {
-                    if (correctLetters.Contains(word[i]))
-                    {
-                        sb.Append(word[i] + " ");
-                    }
-                    else
-                    {
-                        sb.Append("_ ");
-                    }
+                    sb.Append(word[i] + " ");
                 }
                 else
                 {
                     sb.Append("_ ");
-                }
-                
+                }   
             }
 
             sb.Append("\t\tGuesses left: "+ remainingGuesses);
