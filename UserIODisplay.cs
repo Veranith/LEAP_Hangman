@@ -12,22 +12,35 @@ namespace Hangman
         public static void welcomeMessage()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Welcome to Hangperson.");
-            sb.AppendLine("");
+            sb.AppendLine("\n   ** Welcome to Hangperson **\n");
+            sb.AppendLine("Try to find the hidden word by selecting letters one at a time before running out of guesses.");
 
             Console.WriteLine(sb.ToString());
         }
 
-        public static void printGameBoard(List<char> correctLetters, string word, int remainingGuesses, List<char> failedGuesses)
+        public static void printGameBoard(Game game)
         {
+            Console.Clear();
+            welcomeMessage();
             var sb = new StringBuilder();
-            for (int i = 0; i < word.Length; i++)
+
+            if (game.userGameMessage.Length > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine(game.userGameMessage);
+                sb.AppendLine();
+                game.userGameMessage = "";
+            } else { sb.AppendLine("\n\n"); }
+
+
+            sb.Append('\t');
+            for (int i = 0; i < game.word.Length; i++)
             {
                 // null-conditional operator
                 // https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/october/csharp-the-new-and-improved-csharp-6-0
-                if (correctLetters?.Contains(word[i]) ?? false)
+                if (game.correctGuesses?.Contains(game.word[i]) ?? false)
                 {
-                    sb.Append(word[i] + " ");
+                    sb.Append(game.word[i] + " ");
                 }
                 else
                 {
@@ -35,9 +48,9 @@ namespace Hangman
                 }   
             }
 
-            sb.Append("\t\tGuesses left: "+ remainingGuesses);
-            sb.Append("\t\tGuessed letters: ");
-            sb.AppendJoin(" ", failedGuesses);
+            sb.Append("\t\tGuesses left: "+ game.remainingGuesses);
+            sb.Append("\t\tMissed letters: ");
+            sb.AppendJoin(" ", game.failedGuesses);
             sb.AppendLine();
             Console.WriteLine(sb.ToString());
 

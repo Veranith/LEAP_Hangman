@@ -13,6 +13,7 @@ namespace Hangman
         public List<char> correctGuesses { get; set; }
         public List<char> failedGuesses { get; set; }
         public string word { get; set; }
+        public string userGameMessage { get; set; }
 
         public Game()
         {
@@ -20,15 +21,12 @@ namespace Hangman
             word = RandomWord.next(RandomWord.dictionary);
             correctGuesses = new List<char>();
             failedGuesses = new List<char>();
+            userGameMessage = "";
         }
 
         public void start()
 
         {
-            //Game game = new();
-            
-            UserIODisplay.welcomeMessage();
-
             do
             {
                 printGameBoard();
@@ -40,7 +38,7 @@ namespace Hangman
                     correctGuesses.Add(chosenChar);
                     if (checkIfWon())
                     {
-                        Console.WriteLine("You won!!!");
+                        Console.WriteLine("\nYou won!!!");
                         break;
                     }
                 } else
@@ -52,7 +50,7 @@ namespace Hangman
                     }
                     else
                     {
-                        Console.WriteLine("\nYou have already choosen this lettter.\n");
+                        userGameMessage = ("You have already choosen this letter.");
                     }
                 }
             }
@@ -67,7 +65,7 @@ namespace Hangman
 
         private void printGameBoard()
         {
-            UserIODisplay.printGameBoard(correctGuesses, word, remainingGuesses, failedGuesses);
+            UserIODisplay.printGameBoard(this);
         }
 
         private bool checkIfWon()
