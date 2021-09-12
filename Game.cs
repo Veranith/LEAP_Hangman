@@ -35,7 +35,7 @@ namespace Hangman
 
                 char chosenChar = UserIOInput.getLetterFromUser();
 
-                if (word.Contains(chosenChar))
+                if (word.Contains(chosenChar) && correctGuesses.Contains(chosenChar) == false)
                 {
                     correctGuesses.Add(chosenChar);
                     if (checkIfWon())
@@ -45,8 +45,15 @@ namespace Hangman
                     }
                 } else
                 {
-                    failedGuesses.Add(chosenChar);
-                    remainingGuesses--;
+                    if (failedGuesses.Contains(chosenChar) == false && correctGuesses.Contains(chosenChar) == false)
+                    {
+                        failedGuesses.Add(chosenChar);
+                        remainingGuesses--;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYou have already choosen this lettter.\n");
+                    }
                 }
             }
             while (remainingGuesses > 0);
