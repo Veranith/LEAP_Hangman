@@ -14,7 +14,7 @@ namespace Hangman
         {
             Random random = new();
 
-            return dictionary[random.Next(0,dictionary.Count)];
+            return dictionary[random.Next(0,dictionary.Count)].ToLower();
         }
         
     }

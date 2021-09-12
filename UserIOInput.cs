@@ -21,7 +21,7 @@ namespace Hangman
             }
             while (result.Length != 1);
 
-            return result[0];
+            return Char.ToLower(result[0]);
         }
     }
 }
