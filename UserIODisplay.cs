@@ -42,9 +42,9 @@ namespace Hangman
             }
 
             sb.Append("\t\tGuesses left: "+ remainingGuesses);
-
-            sb.AppendLine("\t\tGuessed letters: " + failedGuesses);
-
+            sb.Append("\t\tGuessed letters: ");
+            sb.AppendJoin(" ", failedGuesses);
+            sb.AppendLine();
             Console.WriteLine(sb.ToString());
 
         }
