@@ -19,7 +19,7 @@ namespace Hangman
                 Console.Write("Please type a letter : ");
                 result = Console.ReadLine();
             }
-            while (result.Length != 1);
+            while (result.Length != 1 || Char.IsLetter(result[0]) == false);
 
             return Char.ToLower(result[0]);
         }
